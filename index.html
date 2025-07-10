@@ -13,8 +13,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        h1 {
+            font-family: 'Share Tech Mono', monospace;
+            /* Font gần giống Atlantico */
+            font-weight: bold;
+        }
+
         body {
-            background-color: #f0f4f8;
+            background-color: #fefefe;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,27 +31,33 @@
             text-align: center;
         }
 
-        h1 {
-            font-size: 20vw;
-            /* Tự động theo chiều ngang màn hình */
+        h2 {
+            font-size: 6vw;
             margin-bottom: 30px;
-            color: #2c3e50;
-            word-break: break-word;
+            color: #444;
+            display: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background-color: #3498db;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            background-color: #f39c12;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: #e67e22;
             transform: scale(1.05);
         }
 
@@ -58,8 +70,12 @@
                 font-size: 8rem;
             }
 
+            h2 {
+                font-size: 2.5rem;
+            }
+
             button {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -67,13 +83,77 @@
 
 <body>
 
-    <h1 id="number-display">00000</h1>
-    <button onclick="generateRandomNumber()">Random</button>
+    <h1 id="number-display">0</h1>
+    <h2 id="hungarian-text">nulla</h2>
+
+    <div class="button-group">
+        <button onclick="generateRandomNumber()">Random</button>
+        <button onclick="toggleHungarianText()" id="toggle-btn">Hiện chữ</button>
+    </div>
 
     <script>
+        function numberToHungarian(n) {
+            const ones = ["", "egy", "kettő", "három", "négy", "öt", "hat", "hét", "nyolc", "kilenc"];
+            const teens = ["tíz", "tizenegy", "tizenkettő", "tizenhárom", "tizennégy", "tizenöt", "tizenhat", "tizenhét", "tizennyolc", "tizenkilenc"];
+            const tens = ["", "", "húsz", "harminc", "negyven", "ötven", "hatvan", "hetven", "nyolcvan", "kilencven"];
+
+            function under1000(num) {
+                const parts = [];
+                const hundred = Math.floor(num / 100);
+                const tenUnit = num % 100;
+
+                if (hundred) parts.push(ones[hundred] + "száz");
+
+                if (tenUnit > 9 && tenUnit < 20) {
+                    parts.push(teens[tenUnit - 10]);
+                } else {
+                    const ten = Math.floor(tenUnit / 10);
+                    const unit = tenUnit % 10;
+                    if (ten) parts.push(tens[ten]);
+                    if (unit) parts.push(ones[unit]);
+                }
+
+                return parts.join(" ");
+            }
+
+            if (n === 0) return "nulla";
+
+            const thousand = Math.floor(n / 1000);
+            const remainder = n % 1000;
+
+            const parts = [];
+
+            if (thousand > 0) {
+                if (thousand === 1) {
+                    parts.push("ezer");
+                } else {
+                    parts.push(under1000(thousand) + " ezer");
+                }
+            }
+
+            if (remainder > 0) {
+                parts.push(under1000(remainder));
+            }
+
+            return parts.join(" ").trim();
+        }
+
         function generateRandomNumber() {
             const randomNum = Math.floor(Math.random() * 99999) + 1;
-            document.getElementById('number-display').textContent = randomNum.toString().padStart(5, '0');
+            document.getElementById('number-display').textContent = randomNum.toString();
+            document.getElementById('hungarian-text').textContent = numberToHungarian(randomNum);
+        }
+
+        function toggleHungarianText() {
+            const h2 = document.getElementById('hungarian-text');
+            const btn = document.getElementById('toggle-btn');
+            if (h2.style.display === "none") {
+                h2.style.display = "block";
+                btn.textContent = "Ẩn chữ";
+            } else {
+                h2.style.display = "none";
+                btn.textContent = "Hiện chữ";
+            }
         }
     </script>
 
