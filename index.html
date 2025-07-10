@@ -5,18 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Số</title>
+
+    <!-- Font vuông giống máy tính tiền -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        h1 {
-            font-family: 'Share Tech Mono', monospace;
-            /* Font gần giống Atlantico */
-            font-weight: bold;
         }
 
         body {
@@ -31,33 +29,44 @@
             text-align: center;
         }
 
+        h1 {
+            font-size: 30vw;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #000;
+            line-height: 1.2;
+        }
+
         h2 {
-            font-size: 6vw;
-            margin-bottom: 30px;
+            font-size: 7vw;
+            margin-bottom: 20px;
             color: #444;
             display: none;
+            font-weight: 600;
         }
 
         .button-group {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
+            margin-bottom: 5px;
         }
 
         button {
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            background-color: #f39c12;
-            color: white;
+            padding: 6px 14px;
+            font-size: 3vw;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            color: white;
+            min-width: 90px;
         }
 
         button:hover {
-            background-color: #e67e22;
             transform: scale(1.05);
         }
 
@@ -65,9 +74,61 @@
             transform: scale(0.98);
         }
 
+        #random-btn {
+            background-color: #f39c12;
+        }
+
+        #random-btn:hover {
+            background-color: #e67e22;
+        }
+
+        #toggle-btn {
+            background-color: #2980b9;
+        }
+
+        #toggle-btn:hover {
+            background-color: #1c5980;
+        }
+
+        #phonetic-btn {
+            background-color: #27ae60;
+        }
+
+        #phonetic-btn:hover {
+            background-color: #1e8745;
+        }
+
+        #footer-text {
+            font-size: 0.7rem;
+            color: #777;
+            margin-top: 5px;
+            user-select: none;
+        }
+
+        table {
+            margin-top: 15px;
+            border-collapse: collapse;
+            width: 90vw;
+            max-width: 400px;
+            display: none;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: 700;
+        }
+
         @media (min-width: 768px) {
             h1 {
-                font-size: 8rem;
+                font-size: 12rem;
             }
 
             h2 {
@@ -75,7 +136,14 @@
             }
 
             button {
-                font-size: 1.3rem;
+                font-size: 1rem;
+                padding: 8px 18px;
+                min-width: 110px;
+            }
+
+            table {
+                max-width: 500px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -87,9 +155,195 @@
     <h2 id="hungarian-text">nulla</h2>
 
     <div class="button-group">
-        <button onclick="generateRandomNumber()">Random</button>
-        <button onclick="toggleHungarianText()" id="toggle-btn">Hiện chữ</button>
+        <button id="random-btn" onclick="generateRandomNumber()">Random</button>
+        <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
+        <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
     </div>
+
+    <div id="footer-text">Website by Tran Van Quyen</div>
+
+    <table id="phonetic-table" aria-label="Bảng phiên âm chữ cái tiếng Hungary">
+        <thead>
+            <tr>
+                <th>Chữ cái</th>
+                <th>Phiên âm tiếng Việt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A</td>
+                <td>o (Ngắn gọn)</td>
+            </tr>
+            <tr>
+                <td>Á</td>
+                <td>á (Phát âm dài ra)</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>bờ</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>xờ (đọc mạnh, xiết qua kẽ răng)</td>
+            </tr>
+            <tr>
+                <td>Cs</td>
+                <td>chờ</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>đờ</td>
+            </tr>
+            <tr>
+                <td>Dzs</td>
+                <td>gi (như 'dž')</td>
+            </tr>
+            <tr>
+                <td>Dz</td>
+                <td>dz</td>
+            </tr>
+            <tr>
+                <td>E</td>
+                <td>e</td>
+            </tr>
+            <tr>
+                <td>É</td>
+                <td>ế (kéo dài ra)</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>phờ</td>
+            </tr>
+            <tr>
+                <td>G</td>
+                <td>gờ</td>
+            </tr>
+            <tr>
+                <td>Gy</td>
+                <td>giờ</td>
+            </tr>
+            <tr>
+                <td>H</td>
+                <td>hờ</td>
+            </tr>
+            <tr>
+                <td>I</td>
+                <td>i</td>
+            </tr>
+            <tr>
+                <td>Í</td>
+                <td>ì kéo dài ra</td>
+            </tr>
+            <tr>
+                <td>J</td>
+                <td>giờ (nếu đứng cuối thì đọc là i)</td>
+            </tr>
+            <tr>
+                <td>K</td>
+                <td>kờ</td>
+            </tr>
+            <tr>
+                <td>L</td>
+                <td>lờ</td>
+            </tr>
+            <tr>
+                <td>Ly</td>
+                <td>i</td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>mờ</td>
+            </tr>
+            <tr>
+                <td>N</td>
+                <td>nờ</td>
+            </tr>
+            <tr>
+                <td>Ny</td>
+                <td>nhờ</td>
+            </tr>
+            <tr>
+                <td>O</td>
+                <td>ô</td>
+            </tr>
+            <tr>
+                <td>Ó</td>
+                <td>ố (kéo dài ra)</td>
+            </tr>
+            <tr>
+                <td>Ö</td>
+                <td>uê</td>
+            </tr>
+            <tr>
+                <td>Ő</td>
+                <td>uế (kéo dài ra)</td>
+            </tr>
+            <tr>
+                <td>P</td>
+                <td>pờ</td>
+            </tr>
+            <tr>
+                <td>R</td>
+                <td>rờ</td>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>sờ</td>
+            </tr>
+            <tr>
+                <td>Sz</td>
+                <td>xờ (xờ nhẹ)</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>tờ</td>
+            </tr>
+            <tr>
+                <td>Ty</td>
+                <td>chờ</td>
+            </tr>
+            <tr>
+                <td>U</td>
+                <td>u</td>
+            </tr>
+            <tr>
+                <td>Ú</td>
+                <td>ú (kéo dài ra)</td>
+            </tr>
+            <tr>
+                <td>Ü</td>
+                <td>uy</td>
+            </tr>
+            <tr>
+                <td>Ű</td>
+                <td>ùy</td>
+            </tr>
+            <tr>
+                <td>V</td>
+                <td>vờ</td>
+            </tr>
+            <tr>
+                <td>W</td>
+                <td>vờ</td>
+            </tr>
+            <tr>
+                <td>X</td>
+                <td>xờ</td>
+            </tr>
+            <tr>
+                <td>Y</td>
+                <td>í dài (ít dùng)</td>
+            </tr>
+            <tr>
+                <td>Z</td>
+                <td>zờ</td>
+            </tr>
+            <tr>
+                <td>Zs</td>
+                <td>j như trong traffic Jam</td>
+            </tr>
+        </tbody>
+    </table>
 
     <script>
         function numberToHungarian(n) {
@@ -147,7 +401,7 @@
         function toggleHungarianText() {
             const h2 = document.getElementById('hungarian-text');
             const btn = document.getElementById('toggle-btn');
-            if (h2.style.display === "none") {
+            if (h2.style.display === "none" || h2.style.display === "") {
                 h2.style.display = "block";
                 btn.textContent = "Ẩn chữ";
             } else {
@@ -155,8 +409,19 @@
                 btn.textContent = "Hiện chữ";
             }
         }
-    </script>
 
+        function togglePhonetic() {
+            const table = document.getElementById('phonetic-table');
+            const btn = document.getElementById('phonetic-btn');
+            if (table.style.display === "none" || table.style.display === "") {
+                table.style.display = "table";
+                btn.textContent = "Ẩn phiên âm";
+            } else {
+                table.style.display = "none";
+                btn.textContent = "Phiên âm chữ cái";
+            }
+        }
+    </script>
 </body>
 
 </html>
