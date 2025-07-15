@@ -371,8 +371,10 @@
                 } else {
                     const ten = Math.floor(tenUnit / 10);
                     const unit = tenUnit % 10;
-                    if (ten && unit) {
-                        parts.push(tens[ten] + ones[unit]); // ghép liền
+                    if (tenUnit >= 20 && unit > 0) {
+                        // Ví dụ: 27 = huszon + hét
+                        const tenPrefix = tens[ten].replace("húsz", "huszon"); // đổi húsz -> huszon
+                        parts.push(tenPrefix + ones[unit]);
                     } else {
                         if (ten) parts.push(tens[ten]);
                         if (unit) parts.push(ones[unit]);
@@ -381,6 +383,7 @@
 
                 return parts.join(" ");
             }
+
 
             if (n === 0) return "nulla";
 
