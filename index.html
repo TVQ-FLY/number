@@ -5,10 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Số</title>
-
-    <!-- Font vuông giống máy tính tiền -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
     <style>
         * {
             box-sizing: border-box;
@@ -65,6 +62,23 @@
             color: white;
             min-width: 90px;
         }
+
+        #random-min {
+            background-color: #8e44ad;
+        }
+
+        #random-min:hover {
+            background-color: #732d91;
+        }
+
+        #random-max {
+            background-color: #c0392b;
+        }
+
+        #random-max:hover {
+            background-color: #922b21;
+        }
+
 
         button:hover {
             transform: scale(1.05);
@@ -150,19 +164,21 @@
 </head>
 
 <body>
-
     <h1 id="number-display">0</h1>
     <h2 id="hungarian-text">nulla</h2>
 
     <div class="button-group">
         <button id="random-btn" onclick="generateRandomNumber()">Random</button>
-        <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
-        <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
+        <button onclick="generateSmall()" id="random-min">Random < 10000</button>
+                <button onclick="generateLarge()" id="random-max">Random > 10000</button>
+                <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
+                <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
     </div>
+
 
     <div id="footer-text">Website by Tran Van Quyen</div>
 
-    <table id="phonetic-table" aria-label="Bảng phiên âm chữ cái tiếng Hungary">
+    <table id="phonetic-table">
         <thead>
             <tr>
                 <th>Chữ cái</th>
@@ -180,7 +196,7 @@
             </tr>
             <tr>
                 <td>C</td>
-                <td>xờ (đọc mạnh, xiết qua kẽ răng)</td>
+                <td>xờ</td>
             </tr>
             <tr>
                 <td>D</td>
@@ -208,7 +224,7 @@
             </tr>
             <tr>
                 <td>J</td>
-                <td>giờ (nếu đứng cuối thì đọc là i)</td>
+                <td>giờ</td>
             </tr>
             <tr>
                 <td>K</td>
@@ -260,7 +276,7 @@
             </tr>
             <tr>
                 <td>Y</td>
-                <td>í dài (ít dùng)</td>
+                <td>í dài</td>
             </tr>
             <tr>
                 <td>Z</td>
@@ -270,23 +286,21 @@
                 <td>X</td>
                 <td>xờ</td>
             </tr>
-
-            <!-- Các chữ cái ghép và biến âm -->
             <tr>
                 <td>Á</td>
-                <td>á (Phát âm dài ra)</td>
+                <td>á</td>
             </tr>
             <tr>
                 <td>É</td>
-                <td>ế (kéo dài ra)</td>
+                <td>ế</td>
             </tr>
             <tr>
                 <td>Í</td>
-                <td>ì kéo dài ra</td>
+                <td>ì</td>
             </tr>
             <tr>
                 <td>Ó</td>
-                <td>ố (kéo dài ra)</td>
+                <td>ố</td>
             </tr>
             <tr>
                 <td>Ö</td>
@@ -294,11 +308,11 @@
             </tr>
             <tr>
                 <td>Ő</td>
-                <td>uế (kéo dài ra)</td>
+                <td>uế</td>
             </tr>
             <tr>
                 <td>Ú</td>
-                <td>ú (kéo dài ra)</td>
+                <td>ú</td>
             </tr>
             <tr>
                 <td>Ü</td>
@@ -326,7 +340,7 @@
             </tr>
             <tr>
                 <td>Sz</td>
-                <td>xờ (xờ nhẹ)</td>
+                <td>xờ nhẹ</td>
             </tr>
             <tr>
                 <td>Ty</td>
@@ -334,7 +348,7 @@
             </tr>
             <tr>
                 <td>Zs</td>
-                <td>j như trong traffic Jam</td>
+                <td>j (Jam)</td>
             </tr>
         </tbody>
     </table>
@@ -357,8 +371,12 @@
                 } else {
                     const ten = Math.floor(tenUnit / 10);
                     const unit = tenUnit % 10;
-                    if (ten) parts.push(tens[ten]);
-                    if (unit) parts.push(ones[unit]);
+                    if (ten && unit) {
+                        parts.push(tens[ten] + ones[unit]); // ghép liền
+                    } else {
+                        if (ten) parts.push(tens[ten]);
+                        if (unit) parts.push(ones[unit]);
+                    }
                 }
 
                 return parts.join(" ");
@@ -368,14 +386,13 @@
 
             const thousand = Math.floor(n / 1000);
             const remainder = n % 1000;
-
             const parts = [];
 
             if (thousand > 0) {
                 if (thousand === 1) {
                     parts.push("ezer");
                 } else {
-                    parts.push(under1000(thousand) + " ezer");
+                    parts.push(under1000(thousand) + "ezer");
                 }
             }
 
@@ -415,6 +432,19 @@
                 btn.textContent = "Phiên âm chữ cái";
             }
         }
+
+        function generateSmall() {
+            const num = Math.floor(Math.random() * 10000); // 0 - 9999
+            document.getElementById('number-display').textContent = num.toString();
+            document.getElementById('hungarian-text').textContent = numberToHungarian(num);
+        }
+
+        function generateLarge() {
+            const num = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000; // 10000 - 99999
+            document.getElementById('number-display').textContent = num.toString();
+            document.getElementById('hungarian-text').textContent = numberToHungarian(num);
+        }
+
     </script>
 </body>
 
