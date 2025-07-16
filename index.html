@@ -80,6 +80,14 @@
         }
 
 
+        button[onclick="generateTiny()"] {
+            background-color: #16a085;
+        }
+
+        button[onclick="generateTiny()"]:hover {
+            background-color: #117a65;
+        }
+
         button:hover {
             transform: scale(1.05);
         }
@@ -160,6 +168,29 @@
                 font-size: 1rem;
             }
         }
+
+        .random-buttons {
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .control-buttons {
+            justify-content: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button-group button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
     </style>
 </head>
 
@@ -167,13 +198,20 @@
     <h1 id="number-display">0</h1>
     <h2 id="hungarian-text">nulla</h2>
 
-    <div class="button-group">
+    <div class="button-group random-buttons">
         <button id="random-btn" onclick="generateRandomNumber()">Random</button>
-        <button onclick="generateSmall()" id="random-min">Random < 10000</button>
-                <button onclick="generateLarge()" id="random-max">Random > 10000</button>
-                <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
-                <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
+        <button onclick="generateTiny()" style="background-color: #16a085;">
+            < 1000</button>
+                <button onclick="generateSmall()" id="random-min">
+                    < 10000</button>
+                        <button onclick="generateLarge()" id="random-max">> 10000</button>
     </div>
+
+    <div class="button-group control-buttons">
+        <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
+        <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
+    </div>
+
 
 
     <div id="footer-text">Website by Tran Van Quyen</div>
@@ -435,6 +473,13 @@
                 btn.textContent = "Phiên âm chữ cái";
             }
         }
+
+        function generateTiny() {
+            const num = Math.floor(Math.random() * 1001); // từ 0 đến 1000
+            document.getElementById('number-display').textContent = num.toString();
+            document.getElementById('hungarian-text').textContent = numberToHungarian(num);
+        }
+
 
         function generateSmall() {
             const num = Math.floor(Math.random() * 10000); // 0 - 9999
