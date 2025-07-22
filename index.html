@@ -193,6 +193,20 @@
             }
         }
 
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 12rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22vw;
+                /* Giảm từ 30vw xuống 22vw */
+            }
+        }
+
+
         #number-display {
             display: flex;
             align-items: flex-end;
@@ -465,7 +479,7 @@
 
         function generateRandomNumber() {
             const randomNum = Math.floor(Math.random() * 99999) + 1;
-            document.getElementById('number-display').textContent = randomNum.toString();
+            document.getElementById('number-value').textContent = randomNum.toString();
             document.getElementById('hungarian-text').textContent = numberToHungarian(randomNum);
         }
 
