@@ -3,15 +3,24 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Random Số</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Số với Font Capitol City</title>
+
     <style>
+        /* Định nghĩa font Capitol City từ thư mục fonts */
+        @font-face {
+            font-family: 'sunspire';
+            src: url('./fonts/sunspire.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Áp dụng font cho toàn bộ trang */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -27,14 +36,13 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 15vw, 8rem);
-            font-family: 'Share Tech Mono', monospace;
-            font-weight: 900;
+            font-family: sunspire;
+            font-size: clamp(3rem, 18vw, 10rem);
+            font-weight: 550;
             margin-bottom: 10px;
             color: #000;
             line-height: 1.2;
         }
-
 
         h2 {
             font-size: 7vw;
@@ -42,6 +50,7 @@
             color: #444;
             display: none;
             font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
         }
 
         .button-group {
@@ -79,7 +88,6 @@
         #random-max:hover {
             background-color: #922b21;
         }
-
 
         button[onclick="generateTiny()"] {
             background-color: #16a085;
@@ -122,10 +130,12 @@
         }
 
         #footer-text {
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             color: #777;
             margin-top: 5px;
             user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
         }
 
         table {
@@ -193,19 +203,11 @@
             }
         }
 
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 12rem;
-            }
-        }
-
         @media (max-width: 600px) {
             h1 {
                 font-size: 22vw;
-                /* Giảm từ 30vw xuống 22vw */
             }
         }
-
 
         #number-display {
             display: flex;
@@ -233,19 +235,15 @@
 
     <div class="button-group random-buttons">
         <button id="random-btn" onclick="generateRandomNumber()">Random</button>
-        <button onclick="generateTiny()" style="background-color: #16a085;">
-            < 1000</button>
-                <button onclick="generateSmall()" id="random-min">
-                    < 10000</button>
-                        <button onclick="generateLarge()" id="random-max">> 10000</button>
+        <button onclick="generateTiny()" style="background-color: #16a085;">&lt; 1000</button>
+        <button onclick="generateSmall()" id="random-min">&lt; 10000</button>
+        <button onclick="generateLarge()" id="random-max">&gt; 10000</button>
     </div>
 
     <div class="button-group control-buttons">
         <button id="toggle-btn" onclick="toggleHungarianText()">Hiện chữ</button>
         <button id="phonetic-btn" onclick="togglePhonetic()">Phiên âm chữ cái</button>
     </div>
-
-
 
     <div id="footer-text">Website by Tran Van Quyen</div>
 
@@ -443,18 +441,15 @@
                     const ten = Math.floor(tenUnit / 10);
                     const unit = tenUnit % 10;
                     if (tenUnit >= 20 && unit > 0) {
-                        // Ví dụ: 27 = huszon + hét
-                        const tenPrefix = tens[ten].replace("húsz", "huszon"); // đổi húsz -> huszon
+                        const tenPrefix = tens[ten].replace("húsz", "huszon");
                         parts.push(tenPrefix + ones[unit]);
                     } else {
                         if (ten) parts.push(tens[ten]);
                         if (unit) parts.push(ones[unit]);
                     }
                 }
-
                 return parts.join(" ");
             }
-
 
             if (n === 0) return "nulla";
 
@@ -508,24 +503,22 @@
         }
 
         function generateTiny() {
-            const num = Math.floor(Math.random() * 1001); // từ 0 đến 1000
+            const num = Math.floor(Math.random() * 1001);
             document.getElementById('number-value').textContent = num.toString();
             document.getElementById('hungarian-text').textContent = numberToHungarian(num);
         }
 
-
         function generateSmall() {
-            const num = Math.floor(Math.random() * 10000); // 0 - 9999
+            const num = Math.floor(Math.random() * 10000);
             document.getElementById('number-value').textContent = num.toString();
             document.getElementById('hungarian-text').textContent = numberToHungarian(num);
         }
 
         function generateLarge() {
-            const num = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000; // 10000 - 99999
+            const num = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             document.getElementById('number-value').textContent = num.toString();
             document.getElementById('hungarian-text').textContent = numberToHungarian(num);
         }
-
     </script>
 </body>
 
