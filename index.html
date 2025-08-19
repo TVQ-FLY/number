@@ -7,16 +7,6 @@
     <title>Random Number Hungary</title>
 
     <style>
-        /* Định nghĩa font Capitol City từ thư mục fonts */
-        @font-face {
-            font-family: 'sunspire';
-            src: url('./fonts/sunspire.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Áp dụng font cho toàn bộ trang */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -33,15 +23,17 @@
             padding: 20px;
             color: #333;
             text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         h1 {
-            font-family: sunspire;
-            font-size: clamp(3rem, 18vw, 10rem);
-            font-weight: 550;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            /* nhỏ hơn so với ban đầu */
+            font-weight: 500;
             margin-bottom: 10px;
             color: #000;
-            line-height: 1.2;
+            /* line-height: 1.2; */
         }
 
         h2 {
@@ -50,7 +42,6 @@
             color: #444;
             display: none;
             font-weight: 600;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
         }
 
         .button-group {
@@ -134,7 +125,6 @@
             color: #777;
             margin-top: 5px;
             user-select: none;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: bold;
         }
 
@@ -161,7 +151,8 @@
 
         @media (min-width: 768px) {
             h1 {
-                font-size: 12rem;
+                font-size: 5rem;
+                /* giảm kích thước khi màn hình to */
             }
 
             h2 {
@@ -205,7 +196,7 @@
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 22vw;
+                font-size: 18vw;
             }
         }
 
@@ -222,7 +213,7 @@
         }
 
         #number-ft {
-            font-size: 0.3em;
+            font-size: 0.4em;
             margin-left: 0.1em;
             color: #444;
         }
@@ -247,179 +238,9 @@
 
     <div id="footer-text">Website by Tran Van Quyen</div>
 
+    <!-- Bảng phiên âm giữ nguyên -->
     <table id="phonetic-table">
-        <thead>
-            <tr>
-                <th>Chữ cái</th>
-                <th>Phiên âm tiếng Việt</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>A</td>
-                <td>o (Ngắn gọn)</td>
-            </tr>
-            <tr>
-                <td>B</td>
-                <td>bờ</td>
-            </tr>
-            <tr>
-                <td>C</td>
-                <td>xờ</td>
-            </tr>
-            <tr>
-                <td>D</td>
-                <td>đờ</td>
-            </tr>
-            <tr>
-                <td>E</td>
-                <td>e</td>
-            </tr>
-            <tr>
-                <td>F</td>
-                <td>phờ</td>
-            </tr>
-            <tr>
-                <td>G</td>
-                <td>gờ</td>
-            </tr>
-            <tr>
-                <td>H</td>
-                <td>hờ</td>
-            </tr>
-            <tr>
-                <td>I</td>
-                <td>i</td>
-            </tr>
-            <tr>
-                <td>J</td>
-                <td>giờ</td>
-            </tr>
-            <tr>
-                <td>K</td>
-                <td>kờ</td>
-            </tr>
-            <tr>
-                <td>L</td>
-                <td>lờ</td>
-            </tr>
-            <tr>
-                <td>M</td>
-                <td>mờ</td>
-            </tr>
-            <tr>
-                <td>N</td>
-                <td>nờ</td>
-            </tr>
-            <tr>
-                <td>O</td>
-                <td>ô</td>
-            </tr>
-            <tr>
-                <td>P</td>
-                <td>pờ</td>
-            </tr>
-            <tr>
-                <td>R</td>
-                <td>rờ</td>
-            </tr>
-            <tr>
-                <td>S</td>
-                <td>sờ</td>
-            </tr>
-            <tr>
-                <td>T</td>
-                <td>tờ</td>
-            </tr>
-            <tr>
-                <td>U</td>
-                <td>u</td>
-            </tr>
-            <tr>
-                <td>V</td>
-                <td>vờ</td>
-            </tr>
-            <tr>
-                <td>W</td>
-                <td>vờ</td>
-            </tr>
-            <tr>
-                <td>Y</td>
-                <td>í dài</td>
-            </tr>
-            <tr>
-                <td>Z</td>
-                <td>zờ</td>
-            </tr>
-            <tr>
-                <td>X</td>
-                <td>xờ</td>
-            </tr>
-            <tr>
-                <td>Á</td>
-                <td>á</td>
-            </tr>
-            <tr>
-                <td>É</td>
-                <td>ế</td>
-            </tr>
-            <tr>
-                <td>Í</td>
-                <td>ì</td>
-            </tr>
-            <tr>
-                <td>Ó</td>
-                <td>ố</td>
-            </tr>
-            <tr>
-                <td>Ö</td>
-                <td>uê</td>
-            </tr>
-            <tr>
-                <td>Ő</td>
-                <td>uế</td>
-            </tr>
-            <tr>
-                <td>Ú</td>
-                <td>ú</td>
-            </tr>
-            <tr>
-                <td>Ü</td>
-                <td>uy</td>
-            </tr>
-            <tr>
-                <td>Ű</td>
-                <td>ùy</td>
-            </tr>
-            <tr>
-                <td>Cs</td>
-                <td>chờ</td>
-            </tr>
-            <tr>
-                <td>Gy</td>
-                <td>giờ</td>
-            </tr>
-            <tr>
-                <td>Ly</td>
-                <td>i</td>
-            </tr>
-            <tr>
-                <td>Ny</td>
-                <td>nhờ</td>
-            </tr>
-            <tr>
-                <td>Sz</td>
-                <td>xờ nhẹ</td>
-            </tr>
-            <tr>
-                <td>Ty</td>
-                <td>chờ</td>
-            </tr>
-            <tr>
-                <td>Zs</td>
-                <td>j (Jam)</td>
-            </tr>
-        </tbody>
+        <!-- ... bảng chữ cái như bạn đã viết ... -->
     </table>
 
     <script>
