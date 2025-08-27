@@ -293,11 +293,31 @@
             return parts.join(" ").trim();
         }
 
+        let lastType = null; // "small" hoặc "large"
+
         function generateRandomNumber() {
-            const randomNum = Math.floor(Math.random() * 99999) + 1;
+            let randomNum;
+            let currentType;
+
+            if (lastType === "small") {
+                // lần trước đã ra số nhỏ -> lần này ra số lớn (1000 - 50000)
+                randomNum = Math.floor(Math.random() * (50000 - 1000 + 1)) + 1000;
+                currentType = "large";
+            } else {
+                // lần đầu tiên hoặc sau khi large -> ra số nhỏ (1 - 999)
+                randomNum = Math.floor(Math.random() * 999) + 1;
+                currentType = "small";
+            }
+
+            // cập nhật hiển thị
             document.getElementById('number-value').textContent = randomNum.toString();
             document.getElementById('hungarian-text').textContent = numberToHungarian(randomNum);
+
+            // lưu loại số cho lần sau
+            lastType = currentType;
         }
+
+
 
         function toggleHungarianText() {
             const h2 = document.getElementById('hungarian-text');
